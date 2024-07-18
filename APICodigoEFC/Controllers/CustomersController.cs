@@ -1,6 +1,7 @@
 ﻿using APICodigoEFC.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -31,7 +32,7 @@ namespace APICodigoEFC.Controllers
 
 
             //return _context.Customers.ToList();
-            IQueryable<Customer> query = _context.Customers;
+            IQueryable<Customer> query = _context.Customers.Where(x=>x.IsActive);
             if (!string.IsNullOrEmpty(name))
                 query = query.Where(x => x.Name.Contains(name));
 
@@ -47,6 +48,24 @@ namespace APICodigoEFC.Controllers
         { 
             _context.Customers.Add(customer);
             _context.SaveChanges();
+        }
+
+        [HttpPut]
+        public void Update([FromBody] Customer customer)
+        {
+            _context.Entry(customer).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            var customer = _context.Customers.Find(id);
+            customer.IsActive = false;
+            _context.Entry(customer).State = EntityState.Modified;
+            //_context.Customers.Remove(customer);
+            _context.SaveChanges();
+
         }
     }
 }
