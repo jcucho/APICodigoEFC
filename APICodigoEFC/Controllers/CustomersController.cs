@@ -20,7 +20,7 @@ namespace APICodigoEFC.Controllers
 
         [HttpGet]
         public List<Customer> Get(string? name, string? documentNumber) {
-
+            //version antigua
             //var query = _context.Customers.Where(
             //                                        x=>x.Name.Contains(name.Trim()) 
             //                                        || x.DocumentNumber.Contains(documentNumber.Trim())
@@ -62,7 +62,7 @@ namespace APICodigoEFC.Controllers
         {
             var customer = _context.Customers.Find(id);
             customer.IsActive = false;
-            _context.Entry(customer).State = EntityState.Modified;
+
             //_context.Customers.Remove(customer);
             _context.SaveChanges();
 
