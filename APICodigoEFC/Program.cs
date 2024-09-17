@@ -56,9 +56,10 @@ builder.Services.AddSwaggerGen();
     builder.Services.AddDbContext<CodigoContext>(
     options =>
     {
-        options.UseSqlServer("Data Source=.;" +
-            "Initial Catalog=CodigoDBEF;Integrated Security=true;" +
-            "TrustServerCertificate=True");
+        //options.UseSqlServer("Data Source=.;" +
+        //    "Initial Catalog=CodigoDBEF;Integrated Security=true;" +
+        //    "TrustServerCertificate=True");
+        options.UseSqlServer("Server=tcp:codigoserverdatabasedemo.database.windows.net,1433;Initial Catalog=codigodb;Persist Security Info=False;User ID=usercodigo;Password=Julio2024.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
     });
 
 var app = builder.Build();
