@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APICodigoEFC.Migrations
 {
     [DbContext(typeof(CodigoContext))]
-    [Migration("20240711164746_v12 delete esActivo in Product")]
-    partial class v12deleteesActivoinProduct
+    [Migration("20240917142959_create database")]
+    partial class createdatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -114,6 +114,9 @@ namespace APICodigoEFC.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductID"));
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
